@@ -1,0 +1,29 @@
+.history .form-control{
+    padding: 8px !important;
+    font-size: 13px !important;
+}
+.historyContainer{
+    background: #3B9093;
+    color: white !important;
+}
+.css-15n4jlm-MuiDataGrid-root{
+    color: white !important;
+    text-align: center !important;
+
+}
+.css-15n4jlm-MuiDataGrid-root .MuiDataGrid-container--top [role=row]{
+    background: #1f8a8a !important;
+    color: white !important;
+    text-align: center !important;
+}
+@media screen and (max-width:530px) {
+    .historyTitle{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width:400px) {
+    .historyTitle{
+        font-size: 12px;
+        text-wrap: nowrap;
+    }
+}

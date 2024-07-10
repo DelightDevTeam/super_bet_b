@@ -1,0 +1,37 @@
+.currentBalance{
+    background: #3b9093;
+    text-wrap: nowrap;
+}
+.currentBalanceBtn{
+    width: 45%;
+}
+
+@media screen and (max-width:500px) {
+    .currentBalance h5{
+        font-size: 18px;
+    }
+}
+@media screen and (max-width:450px) {
+    .currentBalanceImg{
+        width: 25px;
+        height: 25px;
+    }
+}
+@media screen and (max-width:380px) {
+    .currentBalance h5{
+        font-size: 16px;
+    }
+}
+@media screen and (max-width:350px) {
+    .currentBalanceBtn{
+        width: 48%;
+    }
+    .currentBalanceText{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width:330px) {
+    .currentBalance h5{
+        font-size: 15px;
+    }
+}

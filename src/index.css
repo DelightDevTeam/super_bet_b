@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+body{
+  overflow-x: hidden;
+  font-family: "Orbitron", sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  background: #00595C;
+  color: white;
+}
+p{
+  padding: 0;
+  margin: 0;
+}
+button{
+  border: none;
+}
+.cursor-pointer{
+  cursor: pointer;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
+.w-full{
+  width: 100%;
+}
+.popUpImg{
+  width: 100%;
+  height: 280px;
+ }
+ .footerMarqueeImg{
+  height: 50px;
+  width: auto;
+  object-fit: cover;
+}
+.adsModal{
+  margin-top: 20vh !important;
+  --bs-modal-bg: none !important;
+}
+.adsModal .modal-header{
+  border-bottom: none !important;
+}
+.modalCloseBtn{
+  background: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width:500px) {
+  .popUpImg{
+    height: 230px;
+  }
+  .footerMarqueeImg{
+    max-height: 40px;
+  }
+}
+@media screen and (max-width:420px) {
+  .popUpImg{
+    height: 200px;
+  }
+}
+@media screen and (max-width:360px) {
+  .popUpImg{
+    height: 180px;
+  }
+}

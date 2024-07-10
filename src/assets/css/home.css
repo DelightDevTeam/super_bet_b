@@ -1,0 +1,156 @@
+.logo{
+    width: 90px;
+    height: 45px;
+    object-fit: cover;
+}
+.primaryBtn{
+    background: linear-gradient(0.95deg, #00CECE 5.11%, rgba(0, 206, 206, 0) 109.31%);
+    color: white;
+ }
+ .welcomeText{
+    background: #004346;
+  }
+.carouselImg{
+    height: 330px;
+    object-fit: cover;
+    width: 100%;
+}
+ 
+.loremLine1{
+    border-top: 2.46px  dashed #00CECE;
+    height: 2px;
+    width: 20%;
+     }
+.loremLine2{
+    border-top: 2.46px  dashed #00CECE;
+    height: 2px;
+    width: 40%;
+    border-radius: 8px;
+
+}
+.marqueeText{
+    border-left: 2.46px solid #00CECE;
+    border-right: 2.46px solid #00CECE;
+    border-bottom: 2.46px solid #00CECE;
+    border-radius: 8px;
+}
+.marqueeTopImg{
+    width: 98%;
+    margin: auto;
+    margin-bottom: -20px;
+}
+.gameTitle{
+    font-size: 18px;
+    text-wrap: nowrap;
+}
+.activeGameTab{
+    border-bottom: 3px solid #00CECE;
+ }
+ .gameTitleContainer{
+    overflow-x: scroll;
+ }
+ .gameTitleContainer::-webkit-scrollbar{
+    display: none;
+ }
+ .gameImg{
+    border: 3px solid #00CECE;
+    width: 100%;
+}
+.gameImgTitle{
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: black;
+    font-weight: 500;
+    font-size: 13px;
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+     background: linear-gradient(93.92deg, #F9BC2E 0%, #E29A1E 13.29%, #FFCD38 30.34%, #F0AF30 73.17%, #E29A1E 83.8%, #FFCD38 96.43%, #DD931A 100.4%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05));
+    ;
+}
+.fixedBottom{
+    background: #004346;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+.fixedBottomTitle{
+    font-size: 14px;
+}
+ input, label ,input::placeholder{
+    font-size: 14px;
+    font-weight: 500;
+}
+.loginBtn{
+    background: #00CECE;
+    color: black;
+}
+ 
+@media screen and (max-width:800px) {
+    .carouselImg{
+        height: 230px;
+     }
+}
+ @media screen and (max-width:600px) {
+    .gameTitle{
+        font-size: 16px;
+    }
+ }
+ @media screen and (max-width:580px) {
+    .gameImg{
+        width: 93%;
+    }
+    .gameImgTitle{
+        right: 10px;
+        bottom: 0px;
+        left: 0px;
+    }
+}
+ @media screen and (max-width:520px) {
+    .gameTitle{
+        font-size: 11px;
+    }
+ }
+@media screen and (max-width:500px) {
+    .carouselImg{
+        height: 180px;
+     }
+}
+@media screen and (max-width:450px) {
+    
+    .logo{
+        width: 70px;
+        height: 35px;
+    }
+    .welcomeText{
+        font-size: 13px;
+    }
+    .gameTitle{
+        font-size: 14px;
+    }
+    .gameImgTitle{
+        font-size: 10px;
+    }
+    .fixedBottomTitle{
+        font-size: 13px;
+    }
+    .userNav{
+        font-size: 13px;
+
+    }
+ }
+ 
+ @media screen and (max-width:370px) {
+   
+    .gameImgTitle{
+        right: 8px;
+     }
+     .fixedBottomTitle{
+        font-size: 12px;
+    }
+ }
