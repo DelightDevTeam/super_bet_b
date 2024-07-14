@@ -8,46 +8,56 @@ import WithDrawPage from "../pages/WithDraw";
 import ProfilePage from "../pages/Profile";
 import HistoryPage from "../pages/History";
 import WinLossReportPage from "../pages/WinLossReport";
+import Login from "../pages/Auth/Login";
+import Games from "../pages/Games";
 
-const routers= createBrowserRouter([
-    {
-        path:'/',
-        element:<Layout/>,
-        children:[
-            {
-                index:true,
-                element:<HomePage/>
-            },
-            {
-                path:'/exchange',
-                element:<ExchangePage/>
-            },
-            {
-                path:'/exchange-bank',
-                element:<ExchangeBank/>
-            },
-            {
-                path:'/top-up',
-                element:<TopUpPage/>
-            },
-            {
-                path:'/with-draw',
-                element:<WithDrawPage/>
-            },
-            {
-                path:'/profile',
-                element:<ProfilePage/>
-            },
-            {
-                path:'/history',
-                element:<HistoryPage/>
-            },
-            {
-                path:'/win-loss-report',
-                element:<WinLossReportPage/>
-            },
-        ]
-    }
-])
+const routers = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: "/games/:provider/:type",
+        element: <Games />,
+      },
+      {
+        path: "/exchange",
+        element: <ExchangePage />,
+      },
+      {
+        path: "/exchange-bank",
+        element: <ExchangeBank />,
+      },
+      {
+        path: "/top-up",
+        element: <TopUpPage />,
+      },
+      {
+        path: "/with-draw",
+        element: <WithDrawPage />,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
+      },
+      {
+        path: "/history",
+        element: <HistoryPage />,
+      },
+      {
+        path: "/win-loss-report",
+        element: <WinLossReportPage />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+]);
 
 export default routers;

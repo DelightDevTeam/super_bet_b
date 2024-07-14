@@ -5,6 +5,8 @@ import wave from '../assets/images/wave.png'
 import cb from '../assets/images/cb.png' 
 import aya from '../assets/images/aya.png' 
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import useFetch from '../hooks/useFetch'
+import BASE_URL from '../hooks/baseURL'
 
 const ExchangeBank = () => {
     const navigate=useNavigate();
@@ -15,9 +17,11 @@ const ExchangeBank = () => {
         {id:3,img:cb,value:'cb',name:'CB'},
         {id:4,img:aya,value:'aya',name:'AYA'},
      ]
+    const {data: user} = useFetch(BASE_URL + '/user');
+
   return (
     <div className='py-4 px-3 px-sm-4'>
-        <CurrentBalance/>
+        <CurrentBalance user={user} />
         <p className=" my-4 fw-bold">Choose Payment Method</p>
         <div className="row">
             {bank.map((item)=>{

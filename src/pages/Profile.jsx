@@ -13,8 +13,11 @@ import { Link } from 'react-router-dom'
 import { CgMail } from 'react-icons/cg'
 import { FaPhoneAlt } from 'react-icons/fa'
 import { Form, Modal } from 'react-bootstrap'
+import useFetch from "../hooks/useFetch";
+import BASE_URL from '../hooks/baseURL';
 
 const ProfilePage = () => {
+    const {data:user} = useFetch(BASE_URL + '/user');
     const [isLanguageModalOpen,setIsLanguageModalOpen]=useState(false);
     const [isPwModalOpen,setIsPwModalOpen]=useState(false);
     const [isEditProfileModalOpen,setIsEditProfileModalOpen]=useState(false);
@@ -82,16 +85,19 @@ const ProfilePage = () => {
         </div>
          <div className='profileContainer col-11 mx-auto m-3 m-lg-0 col-lg-4 p-3 rounded-3'>
            <div className="text-center">
-           <img  src={user} style={{width:'120px',height:'120px'}} />
-           <small className="fw-semibold d-block  mt-2 text-center">Taylor Swift</small>
-           <small className='d-block'>taylor.play</small>
-           <div className="mt-5 mb-3 d-flex align-items-center gap-2">
-            <CgMail/>
-            <small>user@gmail.com</small>
-           </div>
+           {/* <img  src={user} style={{width:'120px',height:'120px'}} /> */}
+           <small className="fw-semibold d-block  mt-2 text-center">{user.name}</small>
+           <small className='d-block'>{user.user_name}</small>
+           {user.email && (
+            <div className="mt-5 mb-3 d-flex align-items-center gap-2">
+                <CgMail/>
+                <small>{user.email}</small>
+            </div>
+           )}
+           
            <div className="d-flex align-items-center gap-2">
             <FaPhoneAlt/>
-            <small>+959-12356890</small>
+            <small>{user.phone}</small>
            </div>
            <button onClick={()=>setIsEditProfileModalOpen(true)} className="w-full loginBtn py-1 fw-semibold mt-4">Edit Profile</button>
            </div>

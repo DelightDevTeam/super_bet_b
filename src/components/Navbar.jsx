@@ -1,11 +1,45 @@
 import React, { useState } from 'react'
 import logo from '../assets/images/logo.png';
-import { Form, Modal } from 'react-bootstrap';
+import { Form, Modal, Spinner } from 'react-bootstrap';
 import user from '../assets/images/user.png';
 import { Link } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
+import BASE_URL from '../hooks/baseURL';
+import { FaUser } from 'react-icons/fa';
+import { FaRegCircleUser, FaRightFromBracket } from 'react-icons/fa6';
 
 const Navbar = () => {
   const [isLoginOpen,setIsLoginOpen]=useState(false)
+  const {data:user} = useFetch(BASE_URL + '/user')
+  const [loader, setLoader] = useState(false);
+
+  // console.log(user);
+  const logout = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+    localStorage.removeItem('token');
+    window.location.href = "/login";
+    try {
+        const response = await fetch(`${BASE_URL}/logout`, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            },
+        });
+        if (response.ok) {
+            // console.log("Logout success!");
+            setLoader(false);
+            window.location.href = "/login";
+        } else {
+            console.error("Logout failed:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error during logout:", error);
+    }
+};
+  
   return (
     <div className='py-2 py-sm-3 px-1 px-sm-2 px-lg-4 d-flex align-items-center justify-content-between'>
       <Link to={'/'}>
@@ -14,15 +48,26 @@ const Navbar = () => {
       {/* <button onClick={()=>setIsLoginOpen(true)} className="primaryBtn py-2 px-4">Login</button> */}
       <div className="d-flex align-items-center gap-4">
         <div className='d-flex align-items-center gap-2'>
-        <img src={user} className='user' />
-        <div>
-          <small className='fw-semibold d-block userNav'>John Doe</small>
-          <small className='userNav fw-semibold'>UserID : 1234</small>
+        {/* <img src={user} className='user' /> */}
+          <FaRegCircleUser className="" style={{ fontSize: "30px" }} />
+          <div>
+            <small className='fw-semibold d-block userNav'>{user && user.name}</small>
+            <small className='userNav fw-semibold'>UserID : {user && user.user_name}</small>
+          </div>
         </div>
-        </div>
-      <Link to={'/exchange'}>
-      <button   className="d-none d-sm-inline primaryBtn py-2 px-4">Exchange</button>
-      </Link>
+
+        {loader ? (
+          <Spinner />
+        ): (
+          <button 
+              className="d-inline btn btn-sm btn-outline-light"
+              onClick={logout}
+          >
+                <FaRightFromBracket />
+                <small className='ms-2 d-none d-md-inline'>Logout</small>
+          </button>
+        )}
+
       </div>
       <Modal  className='text-black loginModal rounded-4' show={isLoginOpen} onHide={()=>setIsLoginOpen(false)}>
         <Modal.Header closeButton style={{background:'#Eee'}}>
