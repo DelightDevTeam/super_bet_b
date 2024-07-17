@@ -11,6 +11,9 @@ import BASE_URL from '../hooks/baseURL'
 const ExchangeBank = () => {
     const navigate=useNavigate();
     const [searchParams]=useSearchParams();
+    const {data: banks} = useFetch(BASE_URL + '/agent-payment-type');
+
+
     const bank=[
         {id:1,img:kpay,value:'kpay',name:'KPay'},
         {id:2,img:wave,value:'wave',name:'Wave '},
@@ -24,12 +27,12 @@ const ExchangeBank = () => {
         <CurrentBalance user={user} />
         <p className=" my-4 fw-bold">Choose Payment Method</p>
         <div className="row">
-            {bank.map((item)=>{
+            {banks && banks.map((item, index)=>{
                 return <div onClick={()=>{
-                    searchParams.get('type')==='top-up'? navigate(`/top-up?bank=${item.value}`) :  navigate(`/with-draw?bank=${item.value}`)
-                }} key={item.id} className="p-1 p-sm-2 col-3">
-                    <img src={item.img}  className='bankImg img-fluid' />
-                    <small className='me-xl-5 pe-xl-5 d-block mt-2 fw-semibold text-center'>{item.name}</small>
+                    searchParams.get('type')==='top-up'? navigate(`/top-up?bank=${item.payment_type_id}`) :  navigate(`/with-draw?bank=${item.value}`)
+                }} key={index} className="col-md-1 col-6">
+                    <img src={item.payment_type.image_url}  className='bankImg img-fluid rounded-3 shadow' />
+                    <small className='d-block mt-3'>{item.payment_type.name}</small>
                 </div>
             })}
         </div>
