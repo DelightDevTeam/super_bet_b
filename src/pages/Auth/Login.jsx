@@ -29,7 +29,7 @@ export default function Login() {
             user_name: name,
             password: password
         };
-        console.log(loginData);
+        // console.log(loginData);
         
         fetch(BASE_URL + '/login', {
           method: 'POST',

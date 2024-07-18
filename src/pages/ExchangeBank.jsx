@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CurrentBalance from '../components/CurrentBalance'
 import kpay from '../assets/images/kpay.png' 
 import wave from '../assets/images/wave.png' 
@@ -11,15 +11,22 @@ import BASE_URL from '../hooks/baseURL'
 const ExchangeBank = () => {
     const navigate=useNavigate();
     const [searchParams]=useSearchParams();
-    const {data: banks} = useFetch(BASE_URL + '/agent-payment-type');
+    const [url, setUrl] = useState(BASE_URL + '/agent-payment-type');
 
+    const type = searchParams.get('type');
 
-    const bank=[
-        {id:1,img:kpay,value:'kpay',name:'KPay'},
-        {id:2,img:wave,value:'wave',name:'Wave '},
-        {id:3,img:cb,value:'cb',name:'CB'},
-        {id:4,img:aya,value:'aya',name:'AYA'},
-     ]
+    useEffect(() => {
+        if(type == 'top-up'){
+            setUrl(BASE_URL + '/agent-payment-type');
+        }else{
+            setUrl((BASE_URL + '/payment-type'));
+        }
+    }, [type])
+
+    const {data: banks} = useFetch(url);
+    // console.log(banks);
+    // return;
+
     const {data: user} = useFetch(BASE_URL + '/user');
 
   return (
@@ -27,14 +34,27 @@ const ExchangeBank = () => {
         <CurrentBalance user={user} />
         <p className=" my-4 fw-bold">Choose Payment Method</p>
         <div className="row">
-            {banks && banks.map((item, index)=>{
-                return <div onClick={()=>{
-                    searchParams.get('type')==='top-up'? navigate(`/top-up?bank=${item.payment_type_id}`) :  navigate(`/with-draw?bank=${item.value}`)
-                }} key={index} className="col-md-1 col-6">
-                    <img src={item.payment_type.image_url}  className='bankImg img-fluid rounded-3 shadow' />
-                    <small className='d-block mt-3'>{item.payment_type.name}</small>
-                </div>
-            })}
+            {type === "top-up" && (
+                banks && banks.map((item, index)=>{
+                    return <div onClick={()=>{
+                        searchParams.get('type')==='top-up'? navigate(`/top-up?bank=${item.payment_type_id}`) :  navigate(`/with-draw?bank=${item.value}`)
+                    }} key={index} className="col-md-1 col-6">
+                        <img src={item.payment_type.image_url ?? item.image_url}  className='bankImg img-fluid rounded-3 shadow' />
+                        <small className='d-block mt-3'>{item.payment_type.name}</small>
+                    </div>
+                })
+            )}
+
+            {type === "with-draw" && (
+                banks && banks.map((item, index)=>{
+                    return <div onClick={()=>{
+                        navigate(`/with-draw?bank=${item.id}`)
+                    }} key={index} className="col-md-1 col-4 mb-5">
+                        <img src={item?.image_url}  className='bankImg img-fluid rounded-3 shadow' />
+                        <small className='d-block mt-3 text-center'>{item?.name}</small>
+                    </div>
+                })
+            )}
         </div>
     </div>
   )

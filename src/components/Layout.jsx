@@ -11,7 +11,7 @@ const Layout = () => {
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(true);
   const {data: ads} = useFetch(BASE_URL + '/popup-ads-banner');
-  console.log(ads);
+  // console.log(ads);
 
   const auth = localStorage.getItem("token");
   const navigate = useNavigate();

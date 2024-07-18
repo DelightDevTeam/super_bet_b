@@ -20,7 +20,7 @@ const ExchangePage = () => {
         </Link>
         <Link to={'/exchange-bank?type=with-draw'} style={{border:'1px solid #B0F0F0' }} className="currentBalanceBtn px-4 px-sm-2 pt-2 pb-3 rounded-3 col-5 d-flex align-items-center justify-content-center gap-2">
          <img src={withdraw} className='currentBalanceImg'/>
-             <p className="fw-bold currentBalanceText ">With Draw</p>
+             <p className="fw-bold currentBalanceText ">Withdraw</p>
        </Link>
      </div>
     </div>
