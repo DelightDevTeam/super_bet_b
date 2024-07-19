@@ -5,7 +5,25 @@ import { DataGrid } from "@mui/x-data-grid";
 import useFetch from "../hooks/useFetch";
 import BASE_URL from "../hooks/baseURL";
 
-const columns = [
+const deposits = [
+  { field: "id", headerName: "No", width: 150},
+  { field: "payment_type", headerName: "Payment Method", width: 150 },
+  { field: "status", headerName: "Status", width: 150 },
+  // { field: "account_no", headerName: "Account No", width: 150 },
+  {
+    field: "amount",
+    headerName: "Amount (MMK)",
+    type: "number",
+    width: 150,
+  },
+  {
+    field: "datetime",
+    headerName: "Date",
+    width: 180,
+  },
+];
+
+const withdraws = [
   { field: "id", headerName: "No", width: 150},
   { field: "account_name", headerName: "Account Name", width: 150 },
   { field: "account_no", headerName: "Account No", width: 150 },
@@ -27,7 +45,7 @@ const HistoryPage = () => {
   const {data: deposit} = useFetch(BASE_URL + "/transaction/deposit-log");
   const {data: withdraw} = useFetch(BASE_URL + "/transaction/withdraw-log");
   const [show, setShow] = useState(false);
-  // console.log(withdraw);
+  console.log(deposit);
 
   return (
     <div
@@ -82,7 +100,7 @@ const HistoryPage = () => {
         {!show && (
           <DataGrid
             rows={deposit}
-            columns={columns}
+            columns={deposits}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 },
@@ -95,7 +113,7 @@ const HistoryPage = () => {
         {show && (
           <DataGrid
             rows={withdraw}
-            columns={columns}
+            columns={withdraws}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 },

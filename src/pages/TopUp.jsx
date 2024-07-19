@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../assets/css/topup.css";
 import { Form, Spinner } from "react-bootstrap";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import BASE_URL from "../hooks/baseURL";
 import { toast, ToastContainer } from "react-toastify";
@@ -18,6 +18,7 @@ const TopUpPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
+  const navigate = useNavigate();
 
    const id = searchParams.get("bank");
    const {data:banks} = useFetch(BASE_URL + '/agent-payment-type');
@@ -50,73 +51,70 @@ const TopUpPage = () => {
     };
 
     const submit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        if (amount < 1000) {
-        setLoading(false)
-          toast.error("အနည်းဆုံး ၁၀၀၀ကျပ်မှ စဖြည့်ပေးပါရန်။", {
-            position: "top-right",
-            autoClose: 1000,
-            theme: 'dark',
-            hideProgressBar: false,
-            closeOnClick: true
-          });
-          return;
-        }
-      
-        const inputData = {
-          "agent_payment_id": paymentType,
-          "amount": amount,
-          "image": file,
-          "note": message ?? ""
-        };
-        console.log(inputData);
-      
-        try {
-          const response = await fetch(BASE_URL + '/transaction/deposit', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'multipart/form-data',
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(inputData)
-          });
-      
-          if (!response.ok) {
-            let errorData = await response.json().catch(() => ({}));
-      
-            if (response.status === 422) {
-              setErrMsg("");
-              setError(errorData.errors || "Unknown error");
-            } else if (response.status === 401) {
-              setError("");
-              setErrMsg(errorData.message || "Unauthorized");
-            } else {
-              throw new Error('Deposit Failed');
-            }
-      
+      e.preventDefault();
+      setLoading(true);
+    
+      if (amount < 1000) {
+        setLoading(false);
+        toast.error("အနည်းဆုံး ၁၀၀၀ကျပ်မှ စဖြည့်ပေးပါရန်။", {
+          position: "top-right",
+          autoClose: 1000,
+          theme: 'dark',
+          hideProgressBar: false,
+          closeOnClick: true
+        });
+        return;
+      }
+    
+      const formData = new FormData();
+      formData.append('agent_payment_id', paymentType);
+      formData.append('amount', amount);
+      formData.append('image', file);
+      formData.append('note', message ?? "");
+    
+      try {
+        const response = await fetch(BASE_URL + '/transaction/deposit', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: formData
+        });
+    
+        if (!response.ok) {
+          let errorData = await response.json().catch(() => ({}));
+    
+          if (response.status === 422) {
+            setErrMsg("");
+            setError(errorData.errors || "Unknown error");
+          } else if (response.status === 401) {
+            setError("");
+            setErrMsg(errorData.message || "Unauthorized");
+          } else {
             throw new Error('Deposit Failed');
           }
-      
-          const data = await response.json();
-          setLoading(false);
-      
-          toast.success("ငွေသွင်းလွှာ ပို့ပြီးပါပြီ။", {
-            position: "top-right",
-            autoClose: 1000,
-            theme: 'dark',
-            hideProgressBar: false,
-            closeOnClick: true
-          });
-      
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-        } catch (error) {
-          console.error('Error during fetch:', error);
-          setLoading(false);
+    
+          throw new Error('Deposit Failed');
         }
+    
+        const data = await response.json();
+        setLoading(false);
+    
+        toast.success("ငွေသွင်းလွှာ ပို့ပြီးပါပြီ။", {
+          position: "top-right",
+          autoClose: 1000,
+          theme: 'dark',
+          hideProgressBar: false,
+          closeOnClick: true
+        });
+    
+        setTimeout(() => {
+          navigate("/history");
+        }, 2000);
+      } catch (error) {
+        console.error('Error during fetch:', error);
+        setLoading(false);
+      }
     };
       
   
@@ -155,6 +153,7 @@ const TopUpPage = () => {
                         type="text" 
                         placeholder="Enter Amount" 
                         onChange={e => setAmount(e.target.value)}
+                        value={amount}
                         />
                     </Form.Group>
 
@@ -164,6 +163,7 @@ const TopUpPage = () => {
                             <Form.Control 
                             type="file" 
                             onChange={handleFileChange}
+                            
                             />
                         </Form.Group>
                         {!preview && error.image && <small className="text-danger fw-bold">{error.image}</small>}
