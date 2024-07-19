@@ -5,22 +5,23 @@ import winloss from '../assets/images/winloss.png'
 import twitter from '../assets/images/twitter.png'
 import titok from '../assets/images/titok.png'
 import fb from '../assets/images/fb.png'
-import user from '../assets/images/profile.png'
+
 import en from '../assets/images/en.png'
 import mm from '../assets/images/mm.png'
 
 import { Link } from 'react-router-dom'
-import { CgMail } from 'react-icons/cg'
-import { FaPhoneAlt } from 'react-icons/fa'
+
 import { Form, Modal } from 'react-bootstrap'
 import useFetch from "../hooks/useFetch";
 import BASE_URL from '../hooks/baseURL';
+
+import UpdateProfile from '../components/UpdateProfile'
 
 const ProfilePage = () => {
     const {data:user} = useFetch(BASE_URL + '/user');
     const [isLanguageModalOpen,setIsLanguageModalOpen]=useState(false);
     const [isPwModalOpen,setIsPwModalOpen]=useState(false);
-    const [isEditProfileModalOpen,setIsEditProfileModalOpen]=useState(false);
+    
     const socials=[
         {img:twitter,link:'/'},
         {img:titok,link:'/'},
@@ -83,25 +84,7 @@ const ProfilePage = () => {
             </div>
         </div>
         </div>
-         <div className='profileContainer col-11 mx-auto m-3 m-lg-0 col-lg-4 p-3 rounded-3'>
-           <div className="text-center">
-           {/* <img  src={user} style={{width:'120px',height:'120px'}} /> */}
-           <small className="fw-semibold d-block  mt-2 text-center">{user.name}</small>
-           <small className='d-block'>{user.user_name}</small>
-           {user.email && (
-            <div className="mt-5 mb-3 d-flex align-items-center gap-2">
-                <CgMail/>
-                <small>{user.email}</small>
-            </div>
-           )}
-           
-           <div className="d-flex align-items-center gap-2">
-            <FaPhoneAlt/>
-            <small>{user.phone}</small>
-           </div>
-           <button onClick={()=>setIsEditProfileModalOpen(true)} className="w-full loginBtn py-1 fw-semibold mt-4">Edit Profile</button>
-           </div>
-         </div>
+        <UpdateProfile user={user} />
       </div>
     </div>
     {/* Language Modal */}
@@ -143,41 +126,7 @@ const ProfilePage = () => {
         </Modal.Body>
          
       </Modal>
-      {/* Edit Profile Modal */}
-      <Modal className='text-black profileModal' show={isEditProfileModalOpen} onHide={()=>setIsEditProfileModalOpen(false)}>
-         <Modal.Body>
-        <h5>Edit Profile</h5>
-        <small className='d-block mb-3'>Please fill all the required fields.</small>
-        <Form>
-            <div className="row">
-                <div className="col-6">
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Name</Form.Label>
-            <Form.Control value={'Taylor Swift'} type="text" placeholder="Name" />
-            </Form.Group>
-                 </div>
-                <div className="col-6">
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Username</Form.Label>
-                <Form.Control  value={'taylor.play'} type="text" placeholder="Username" />
-            </Form.Group>
-                </div>
-            </div>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Phone</Form.Label>
-                <Form.Control value={'0912345689'} type="text" placeholder="Phone" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Email</Form.Label>
-                <Form.Control value={'test@gmail.com'} type="text" placeholder="Email" />
-            </Form.Group>
-         </Form>
-            <button className='loginBtn py-2 w-100 rounded-3'>
-                <small className="fw-semibold">Apply Changes</small>
-            </button>
-        </Modal.Body>
-         
-      </Modal>
+
     </>
   )
 }
