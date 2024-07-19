@@ -21,14 +21,13 @@ const GameTabs = () => {
   const fish_lists = fishGame && fishGame.game_type?.products;
   const fish_lobby = fishGame && fishGame.game_lobby?.products;
 
-  const launchGame = (code, gameId) => (e) => {
+  const launchGame = (t_code, p_code) => (e) => {
     e.preventDefault();
     let gameData = {
-      "productId" : gameId,
-      "gameType" : code
+      "productId" : p_code,
+      "gameType" : t_code
     }
-    console.log(gameData);
-    fetch(BASE_URL + "/game/Seamless/LaunchGame", {
+    fetch(BASE_URL + "/direct/Seamless/LaunchGame", {
       method: "POST",
       headers: {
           Accept: "application/json",
@@ -207,17 +206,17 @@ const GameTabs = () => {
         <div className="row px-2">
             {slot_lists && slot_lists.map((item, index) => {
               return (
-                <div
+                <Link to={'/games/' + item.id + '/' + item.pivot.game_type_id}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                  onClick={launchGame(slotGame.game_type?.code, item.code)}
+                  
                 >
                   <img src={item.imgUrl} className="img-fluid gameImg rounded-3" />
                   <div className="gameImgTitle text-center py-1 px-1 px-sm-2">
                     {item.name}
                   </div>
-                </div>
+                </Link>
               );
             })}
             {slot_lobby && slot_lobby.map((item, index) => {
@@ -241,17 +240,16 @@ const GameTabs = () => {
         <div className="row px-2">
             {casinos_lists && casinos_lists.map((item, index) => {
               return (
-                <div
+                <Link to={'/games/' + item.id + '/' + item.pivot.game_type_id}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                  onClick={launchGame(casinoGame.game_type?.code, item.code)}
                 >
                   <img src={item.imgUrl} className="img-fluid gameImg rounded-3" />
                   <div className="gameImgTitle text-center py-1 px-1 px-sm-2">
                     {item.name}
                   </div>
-                </div>
+                </Link>
               );
             })}
             {casinos_lobby && casinos_lobby.map((item, index) => {
@@ -275,17 +273,16 @@ const GameTabs = () => {
         <div className="row px-2">
             {sports_lists && sports_lists.map((item, index) => {
               return (
-                <div
+                <Link to={'/games/' + item.id + '/' + item.pivot.game_type_id}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                  onClick={launchGame(sportGame.game_type?.code, item.code)}
                 >
                   <img src={item.imgUrl} className="img-fluid gameImg rounded-3" />
                   <div className="gameImgTitle text-center py-1 px-1 px-sm-2">
                     {item.name}
                   </div>
-                </div>
+                </Link>
               );
             })}
             {sports_lobby && sports_lobby.map((item, index) => {
@@ -309,17 +306,16 @@ const GameTabs = () => {
         <div className="row px-2">
             {fish_lists && fish_lists.map((item, index) => {
               return (
-                <div
+                <Link to={'/games/' + item.id + '/' + item.pivot.game_type_id}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                  onClick={launchGame(fishGame.game_type?.code, item.code)}
                 >
                   <img src={item.imgUrl} className="img-fluid gameImg rounded-3" />
                   <div className="gameImgTitle text-center py-1 px-1 px-sm-2">
                   {item.name}
                   </div>
-                </div>
+                </Link>
               );
             })}
             {fish_lobby && fish_lobby.map((item, index) => {
