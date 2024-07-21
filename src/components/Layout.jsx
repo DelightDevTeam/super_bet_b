@@ -20,7 +20,6 @@ const Layout = () => {
   useEffect(() => {
     setLanguage(lan);
   }, [lan]);
-  console.log(language);
 
   const navigate = useNavigate();
 
@@ -34,7 +33,7 @@ const Layout = () => {
     <div>
       {location.pathname === "/" && (
         <div className="welcomeText   text-center py-2 text-white">
-          Welcome To Super Bet
+          {lan === "english" ? "Welcome To Super Bet" : "Super Bet မှ ကြိုဆိုပါတယ်။"}
         </div>
       )}
       <Modal

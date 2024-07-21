@@ -116,13 +116,15 @@ const TopUpPage = () => {
         setLoading(false);
       }
     };
+
+    const language = localStorage.getItem("lan");
       
   
   return (
     <div className="py-4 px-3 px-sm-4 pb-5 mb-5">
         <ToastContainer />
       <div className="topupContainer p-3 rounded-3">
-        <h5 className="fw-bold">Top Up</h5>
+        <h5 className="fw-bold">{language === "english" ? "Top Up" : "ငွေဖြည့်ပေးရန်"}</h5>
         <div className="border border-light bg-transparent rounded-4 p-2 my-3 shadow-lg">
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex">
@@ -142,13 +144,13 @@ const TopUpPage = () => {
             </div>
             
         </div>
-        <small className="d-block fw-bold">Please fill all the required fields.</small>
+        <small className="d-block fw-bold">{language === "english" ? "Please fill all the required fields." : "ကျေးဇူးပြု၍ အောက်ပါ အချက်များကို ထည့်ပေးပါ။"}</small>
         
         <form onSubmit={submit}>
             <div className="row my-3">
                 <div className="col-sm-6 pe-2">
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Amount*</Form.Label>
+                        <Form.Label>{language === "english" ? "Amount*" : "ပမာဏ"}</Form.Label>
                         <Form.Control 
                         type="text" 
                         placeholder="Enter Amount" 
@@ -159,7 +161,7 @@ const TopUpPage = () => {
 
                     <div className="mb-3">
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <Form.Label>Screenshot *</Form.Label>
+                            <Form.Label>{language === "english" ? "Screenshot *" : "လွှဲပြီးကြောင်းဓာတ်ပုံ"}</Form.Label>
                             <Form.Control 
                             type="file" 
                             onChange={handleFileChange}
@@ -173,9 +175,9 @@ const TopUpPage = () => {
                 </div>
                 <div className="col-sm-6 ">
                     <Form.Group className="mb-4" controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>Your Note (Optional)</Form.Label>
+                        <Form.Label>{language === "english" ? "Note* (Optional)" : "မှတ်စု"}</Form.Label>
                         <Form.Control
-                            placeholder="Write note here..."
+                            placeholder={language === "english" ? "Write Your Note" : "မှတ်စု ရေးပါ။"}
                             as="textarea"
                             rows={3}
                             value={message}
@@ -185,7 +187,7 @@ const TopUpPage = () => {
                 </div>
             </div>
             {loading ? <Spinner /> : <button className="loginBtn w-full fw-bold py-2 rounded-3">
-            Submit
+              {language === "english" ? "Submit" : "t"}
             </button>}
             
         </form>

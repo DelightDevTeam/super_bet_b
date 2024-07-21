@@ -46,10 +46,8 @@ export default function UpdateProfile({ user }) {
         onHide={() => setIsEditProfileModalOpen(false)}
       >
         <Modal.Body>
-          <h5>Edit Profile</h5>
-          <small className="d-block mb-3">
-            Please fill all the required fields.
-          </small>
+          <h5>{language == "english" ? "Edit Profile" : "ပရိုဖိုင်ပြင်ရန်"}</h5>
+          <small className='d-block mb-3'>{language === "english" ? "Please fill all the required fields." : "ကျေးဇူးပြု၍ အချက်အလက်များဖြည့်ပါ။"}</small>
           <Form>
             <div className="row">
               <div className="col-6">
@@ -57,47 +55,25 @@ export default function UpdateProfile({ user }) {
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
                 >
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label>{language === "english" ? "Name" : "နာမည်"}</Form.Label>
                   <Form.Control
-                    value={"Taylor Swift"}
                     type="text"
-                    placeholder="Name"
-                  />
-                </Form.Group>
-              </div>
-              <div className="col-6">
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    value={"taylor.play"}
-                    type="text"
-                    placeholder="Username"
+                    placeholder={language === "english" ? "Enter Name" : "နာမည်ရေးပါ။"}
                   />
                 </Form.Group>
               </div>
             </div>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Phone</Form.Label>
+              <Form.Label>{language === "english" ? "Phone" : "ဖုန်း"}</Form.Label>
               <Form.Control
                 value={"0912345689"}
                 type="text"
-                placeholder="Phone"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                value={"test@gmail.com"}
-                type="text"
-                placeholder="Email"
+                placeholder={language === "english" ? "Enter Phone" : "ဖုန်းနံပါတ်ထည့်ပါ။"}
               />
             </Form.Group>
           </Form>
           <button className="loginBtn py-2 w-100 rounded-3">
-            <small className="fw-semibold">Apply Changes</small>
+            <small className="fw-semibold">{language === "english" ? "Apply Changes" : "အတည်ပြုသည်"}</small>
           </button>
         </Modal.Body>
       </Modal>

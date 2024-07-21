@@ -6,7 +6,10 @@ import BASE_URL from '../hooks/baseURL';
 export default function Games() {
     const { provider, type } = useParams();
     const {data: games, loading} = useFetch(BASE_URL + '/game/gamelist/' + provider + '/' + type);
-    // console.log(games);
+    const {data: gameTypes} = useFetch(BASE_URL + '/gameTypeProducts/' + type);
+    const providers = gameTypes?.game_type?.products;
+    const providerName = providers?.find(p => p.id == provider)?.name;
+    // console.log(providers);
 
     const launchGame = (p_code, t_code, g_code) => (e) => {
         e.preventDefault();
@@ -40,9 +43,14 @@ export default function Games() {
           });
     }
 
+    const language = localStorage.getItem("lan");
+
   return (
     <div className='container'>
-        <h4 className="text-center my-4">{type == 1 ? "Slot" : type == 2 ? "Live Casino" : type == 3 ? "Sport Book" : "Fishing"}</h4>
+        <h4 className="text-center my-4">{providerName}</h4>
+        {/* {type == 2 && <h4 className="text-center my-4">{language === "english" ? "Live Casino" : "လိုက်ဖ်ကာစီနို"}</h4>}
+        {type == 3 && <h4 className="text-center my-4">{language === "english" ? "Sport Book" : "အားကစား"}</h4>}
+        {type == 4 && <h4 className="text-center my-4">{language === "english" ? "Fishing" : "ငါးပစ်"}</h4>} */}
 
         <div className="row">
             {

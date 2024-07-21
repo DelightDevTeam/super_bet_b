@@ -28,11 +28,12 @@ const ExchangeBank = () => {
     // return;
 
     const {data: user} = useFetch(BASE_URL + '/user');
+    const language = localStorage.getItem("lan");
 
   return (
     <div className='py-4 px-3 px-sm-4'>
         <CurrentBalance user={user} />
-        <p className=" my-4 fw-bold">Choose Payment Method</p>
+        <p className=" my-4 fw-bold">{language === "english" ? "Choose Payment Method" : "ငွေပေးချေမှု နည်းလမ်းရွေးပါ။"}</p>
         <div className="row">
             {type === "top-up" && (
                 banks && banks.map((item, index)=>{

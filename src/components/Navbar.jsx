@@ -12,6 +12,7 @@ const Navbar = () => {
   const [isLoginOpen,setIsLoginOpen]=useState(false)
   const {data:user} = useFetch(BASE_URL + '/user')
   const [loader, setLoader] = useState(false);
+  const language = localStorage.getItem('lan');
 
   // console.log(user);
   const logout = async (e) => {
@@ -64,7 +65,7 @@ const Navbar = () => {
               onClick={logout}
           >
                 <FaRightFromBracket />
-                <small className='ms-2 d-none d-md-inline'>Logout</small>
+                <small className='ms-2 d-none d-md-inline'>{language === "english" ? "Logout" : "ထွက်ရန်"}</small>
           </button>
         )}
 

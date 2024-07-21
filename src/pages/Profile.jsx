@@ -99,13 +99,15 @@ const ProfilePage = () => {
     {/* Language Modal */}
     <Modal className='text-black profileModal' show={isLanguageModalOpen} onHide={()=>setIsLanguageModalOpen(false)}>
          <Modal.Body>
-        <h5>Change Language</h5>
-        <small className='d-block mb-3'>Please select your Language</small>
+        <h5>{language === "english" ? "Change Language" : "ဘာသာစကားရွေးချယ်ပါ။"}</h5>
+        {/* <small className='d-block mb-3'>{language === "english" ? "Please select your Language" : "ဘာသာစကားရွေးချယ်ပါ။"}</small> */}
             {languages.map((lang)=>{
                 return <div key={lang.id} className='cursor-pointer p-3 border rounded-3 mb-2 d-flex align-items-center gap-1' onClick={() => changeLanguage(lang.value)}>
-                    <img src={lang.img} />
-                    <small className='fw-semibold'>{lang.name}</small>
-                </div>
+                        <img src={lang.img} />
+                        <small className='fw-semibold'>{lang.name}</small>
+                        {language === lang.value && <i className="fas fa-check text-success"></i>}
+                        
+                    </div>
             })}
         </Modal.Body>
          
@@ -113,24 +115,29 @@ const ProfilePage = () => {
       {/* Password Modal */}
       <Modal className='text-black profileModal' show={isPwModalOpen} onHide={()=>setIsPwModalOpen(false)}>
          <Modal.Body>
-        <h5>Change Password</h5>
-        <small className='d-block mb-3'>Please fill all the required fields.</small>
+         {language === "english" ? (
+            <h5>Change Password</h5>
+         ) : (
+            <span>စကားဝှက်ပြောင်းရန်</span>
+         )}
+        
+        <small className='d-block mb-3'>{language === "english" ? "Please fill all the required fields." : "ကျေးဇူးပြု၍ အချက်အလက်များဖြည့်ပါ။"}</small>
         <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Current Password</Form.Label>
-            <Form.Control type="password" placeholder="Current Password" />
+            <Form.Label>{language === "english" ? "Current Password" : "စကားဝှက် အဟောင်းထည့်ပါ။"}</Form.Label>
+            <Form.Control type="password" placeholder='xxxxxx' />
             </Form.Group>
              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>New Password</Form.Label>
-                <Form.Control type="password" placeholder="New Password" />
+                <Form.Label>{language === "english" ? "New Password" : "စကားဝှက် အသစ်ထည့်ပါ။"}</Form.Label>
+                <Form.Control type="password" placeholder='xxxxxx' />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control type="password" placeholder="Confirm Password" />
+                <Form.Label>{language === "english" ? "Confirm Password" : "စကားဝှက် အသစ်အတည်ပြုပါ။"}</Form.Label>
+                <Form.Control type="password" placeholder='xxxxxx' />
             </Form.Group>
          </Form>
             <button className='loginBtn py-2 w-100 rounded-3'>
-                <small className="fw-semibold">Apply Changes</small>
+                <small className="fw-semibold">{language === "english" ? "Apply Changes" : "ပြောင်းပါ။"}</small>
             </button>
         </Modal.Body>
          

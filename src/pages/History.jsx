@@ -22,6 +22,23 @@ const deposits = [
     width: 180,
   },
 ];
+const deposits_mm = [
+  { field: "id", headerName: "နံပါတ်", width: 150},
+  { field: "payment_type", headerName: "ဘဏ်", width: 150 },
+  { field: "status", headerName: "အခြေအနေ", width: 150 },
+  // { field: "account_no", headerName: "Account No", width: 150 },
+  {
+    field: "amount",
+    headerName: "ပမာဏ (ကျပ်)",
+    type: "number",
+    width: 150,
+  },
+  {
+    field: "datetime",
+    headerName: "နေ့ရက်",
+    width: 180,
+  },
+];
 
 const withdraws = [
   { field: "id", headerName: "No", width: 150},
@@ -40,12 +57,30 @@ const withdraws = [
     width: 180,
   },
 ];
+const withdraws_mm = [
+  { field: "id", headerName: "နံပါတ်", width: 150},
+  { field: "account_name", headerName: "အကောင့်နာမည်", width: 150 },
+  { field: "account_no", headerName: "အကောင့်နံပါတ်", width: 150 },
+  { field: "status", headerName: "အခြေအနေ", width: 150 },
+  {
+    field: "amount",
+    headerName: "ပမာဏ (ကျပ်)",
+    type: "number",
+    width: 150,
+  },
+  {
+    field: "datetime",
+    headerName: "နေ့ရက်",
+    width: 180,
+  },
+];
 
 const HistoryPage = () => {
   const {data: deposit} = useFetch(BASE_URL + "/transaction/deposit-log");
   const {data: withdraw} = useFetch(BASE_URL + "/transaction/withdraw-log");
   const [show, setShow] = useState(false);
-  console.log(deposit);
+  // console.log(deposit);
+  const language = localStorage.getItem("lan");
 
   return (
     <div
@@ -81,7 +116,7 @@ const HistoryPage = () => {
               className="bg-white text-black d-flex flex-nowrap"
               onClick={() => setShow(false)}
             >
-              <small className="fw-semibold historyTitle">Deposit</small>
+              <small className="fw-semibold historyTitle">{language === "english" ? "Deposit" : "ငွေသွင်း"}</small>
               <Badge className="ms-1 ms-sm-2" bg="secondary">
                 <small>{deposit && deposit.length}</small>
               </Badge>
@@ -91,7 +126,7 @@ const HistoryPage = () => {
               className="bg-white text-black  d-flex flex-nowrap"
               onClick={() => setShow(true)}
             >
-              <small className="fw-semibold historyTitle">Withdraw</small>
+              <small className="fw-semibold historyTitle">{language === "english" ? "Withdraw" : "ငွေထုတ်"}</small>
               <Badge className="ms-1 ms-sm-2" bg="secondary">
                 <small>{withdraw && withdraw.length}</small>
               </Badge>
@@ -100,7 +135,7 @@ const HistoryPage = () => {
         {!show && (
           <DataGrid
             rows={deposit}
-            columns={deposits}
+            columns={language === "english" ? deposits : deposits_mm}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 },
@@ -113,7 +148,7 @@ const HistoryPage = () => {
         {show && (
           <DataGrid
             rows={withdraw}
-            columns={withdraws}
+            columns={language === "english" ? withdraws : withdraws_mm}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 },

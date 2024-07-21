@@ -96,23 +96,23 @@ const WithDrawPage = () => {
         setLoading(false);
       }
   }
-
+  const language = localStorage.getItem("lan");
 
   return (
     <div className="py-4 px-3 px-sm-4 pb-5 mb-5">
         <ToastContainer />
       <div className="topupContainer p-3 rounded-3">
-        <h5 className="fw-bold">Withdraw</h5>
+        <h5 className="fw-bold">{language === "english" ? "Withdraw" : "ငွေထုတ်"}</h5>
         <img src={bank && bank.image_url} width={100} className="rounded-4 shadow mt-3" alt="" />
-        <small className="d-block mt-3">Please fill all the required fields.</small>
+        <small className="d-block mt-3">{language === "english" ? "Please fill all the required fields.*" : "ပမာဏကျေးဇူးပြု၍ အောက်ပါ အချက်များကို ထည့်ပေးပါ။"}</small>
         <form onSubmit={withdraw}>
         <div className="row my-3">
           <div className="col-sm-6 pe-2">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Account Name*</Form.Label>
+              <Form.Label>{language === "english" ? "Account Name*" : "အကောင့်နာမည်"}</Form.Label>
               <Form.Control 
               type="text" 
-              placeholder="Account Name..."
+              placeholder={language === "english" ? "Account Name*" : "အကောင့်နာမည်"}
               onChange={e => setAccountName(e.target.value)} 
               value={accountName}
               />
@@ -123,10 +123,10 @@ const WithDrawPage = () => {
           </div>
           <div className="col-sm-6 ">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Account / Phone No. *</Form.Label>
+              <Form.Label>{language === "english" ? "Account / Phone No. *" : "အကောင့် (သို့) ဖုန်း"}</Form.Label>
               <Form.Control 
               type="text" 
-              placeholder="Account / Phone No..." 
+              placeholder={language === "english" ? "Account / Phone No. *" : "အကောင့် (သို့) ဖုန်း"}
               onChange={e => setAccountNo(e.target.value)}
               value={accountNo}
               />
@@ -139,10 +139,10 @@ const WithDrawPage = () => {
         <div className="row my-3">
           <div className="col-sm-6 pe-2">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Amount*</Form.Label>
+              <Form.Label>{language === "english" ? "Amount*" : "ပမာဏ"}</Form.Label>
               <Form.Control 
               type="number" 
-              placeholder="Amount..." 
+              placeholder={language === "english" ? "Amount*" : "ပမာဏ"}
               onChange={e => setAmount(e.target.value)}
               value={amount}
               />
@@ -150,9 +150,9 @@ const WithDrawPage = () => {
           </div>
           <div className="col-sm-6 pe-2">
             <Form.Group className="mb-4" controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Your Note</Form.Label>
+                <Form.Label>{language === "english" ? "Note* (Optional)" : "မှတ်စု"}</Form.Label>
                 <Form.Control
-                    placeholder="Write note here..."
+                    placeholder={language === "english" ? "Write Your Note" : "မှတ်စု ရေးပါ။"}
                     as="textarea"
                     rows={3}
                     onChange={e => setNote(e.target.value)}
@@ -163,7 +163,7 @@ const WithDrawPage = () => {
         </div>
         
         {loading ? <Spinner /> : <button className="loginBtn w-full fw-bold py-2 rounded-3" type="submit">
-          Submit
+          {language === "english" ? "Submit" : "တင်သွင်းသည်"}
         </button>}
         
         </form>
