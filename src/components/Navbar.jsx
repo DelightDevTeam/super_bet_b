@@ -40,6 +40,8 @@ const Navbar = () => {
         console.error("Error during logout:", error);
     }
 };
+
+const reload = () => window.location.reload();
   
   return (
     <div className='py-2 py-sm-3 px-1 px-sm-2 px-lg-4 d-flex align-items-center justify-content-between'>
@@ -50,6 +52,7 @@ const Navbar = () => {
       <div className="d-flex align-items-center gap-4">
         <div className='d-flex align-items-center gap-2'>
         {/* <img src={user} className='user' /> */}
+        <i className="fas fa-rotate cursor-pointer me-1" onClick={() => reload()}></i>
           <FaRegCircleUser className="" style={{ fontSize: "30px" }} />
           <div>
             <small className='fw-semibold d-block userNav'>{user && user.name}</small>

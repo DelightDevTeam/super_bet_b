@@ -111,55 +111,57 @@ const ProfilePage = () => {
         <ToastContainer />
       <div className="row cursor-pointer">
         <div className="col-lg-8 pe-3">
-        <div className='profileContainer  p-3 rounded-3'>
-            <h5 className="fw-semibold mb-3">{language === "english" ? "Account Settings" : "အကောင့်သတ်မှတ်ခြင်း"}</h5>
-            <div className="d-flex align-items-center justify-content-between" onClick={()=>setIsLanguageModalOpen(true)}>
-                <div className='d-flex align-items-center gap-2'>
-                    <img src={translate} />
-                    <p>{language === "english" ? "Language" : "ဘာသာစကား"}</p>
+            <div className='profileContainer  p-3 rounded-3'>
+                <h5 className="fw-semibold mb-3">{language === "english" ? "Account Settings" : "အကောင့်သတ်မှတ်ခြင်း"}</h5>
+                <div className="d-flex align-items-center justify-content-between" onClick={()=>setIsLanguageModalOpen(true)}>
+                    <div className='d-flex align-items-center gap-2'>
+                        <img src={translate} />
+                        <p>{language === "english" ? "Language" : "ဘာသာစကား"}</p>
+                    </div>
+                    <p>{language === "english" ? "English" : "မြန်မာ"}</p>
                 </div>
-                <p>{language === "english" ? "English" : "မြန်မာ"}</p>
-            </div>
-            <div className="my-2 d-flex align-items-center justify-content-between">
-                <Link to={'/win-loss-report'} className='d-flex align-items-center gap-2'>
-                    <img src={winloss} />
-                    <p>{language === "english" ? "Win / Loss Report" : "အနိုင်/အရှုံးမှတ်တမ်း"}</p>
-                </Link>
-                <p></p>
-            </div>
-            <div className="my-3 d-flex align-items-center justify-content-between">
-                <div onClick={()=>setIsPwModalOpen(true)} className='d-flex align-items-center gap-2'>
-                    <img src={translate} />
-                    <p>{language === "english" ? "Change Password" : "စကားဝှက်ပြောင်းရန်"}</p>
-                </div>
-                
-            </div>
-            <p className="fw-semibold mb-4 border-top pt-3">{language === "english" ? "Contact Us" : "ဆက်သွယ်ရန်"}</p>
-            <div className="row">
-                {/* <div  className='col-sm-5 mb-4 mb-sm-0'>
-                    <p className="fw-semibold mb-2">Visit Us</p>
-                    <small>12 Marina Boulevard, DBS Asia Central, Marina Bay Financial Centre Tower 3, Singapore 018982</small>
-                </div> */}
-                <div className='mb-4 mb-sm-0  col-sm-4'>
-                    <p className="fw-semibold mb-2">{language === "english" ? "Email Us" : "အီးမေးလ်"}</p>
-                    <small>superbet@gmail.com</small>
-                </div>
-                <div className='  col-sm-3'>
-                    <p className="fw-semibold mb-2">{language === "english" ? "Call Us" : "ဖုန်းခေါ်ဆိုရန်"}</p>
-                    <small className='d-block'>+959-123456890</small>
-                    <small>+959-123456890</small>
-                 </div>
-            </div>
-            <div className="d-flex align-items-center gap-4 mt-4">
-                {socials.map((item,index)=>{
-                    return <Link to={item.link} key={index}>
-                    <img src={item.img} />
+                <div className="my-2 d-flex align-items-center justify-content-between">
+                    <Link to={'/win-loss-report'} className='d-flex align-items-center gap-2'>
+                        <img src={winloss} />
+                        <p>{language === "english" ? "Win / Loss Report" : "အနိုင်/အရှုံးမှတ်တမ်း"}</p>
                     </Link>
-                })}
+                    <p></p>
+                </div>
+                <div className="my-3 d-flex align-items-center justify-content-between">
+                    <div onClick={()=>setIsPwModalOpen(true)} className='d-flex align-items-center gap-2'>
+                        <img src={translate} />
+                        <p>{language === "english" ? "Change Password" : "စကားဝှက်ပြောင်းရန်"}</p>
+                    </div>
+                    
+                </div>
+                <p className="fw-semibold mb-4 border-top pt-3">{language === "english" ? "Contact Us" : "ဆက်သွယ်ရန်"}</p>
+                <div className="row">
+                    {/* <div  className='col-sm-5 mb-4 mb-sm-0'>
+                        <p className="fw-semibold mb-2">Visit Us</p>
+                        <small>12 Marina Boulevard, DBS Asia Central, Marina Bay Financial Centre Tower 3, Singapore 018982</small>
+                    </div> */}
+                    <div className='mb-4 mb-sm-0  col-sm-4'>
+                        <p className="fw-semibold mb-2">{language === "english" ? "Email Us" : "အီးမေးလ်"}</p>
+                        <small>superbet@gmail.com</small>
+                    </div>
+                    <div className='  col-sm-3'>
+                        <p className="fw-semibold mb-2">{language === "english" ? "Call Us" : "ဖုန်းခေါ်ဆိုရန်"}</p>
+                        <small className='d-block'>+959-123456890</small>
+                        <small>+959-123456890</small>
+                    </div>
+                </div>
+                <div className="d-flex align-items-center gap-4 mt-4">
+                    {socials.map((item,index)=>{
+                        return <Link to={item.link} key={index}>
+                        <img src={item.img} />
+                        </Link>
+                    })}
+                </div>
             </div>
         </div>
+        <div className="col-lg-4">
+            <UpdateProfile user={user} />
         </div>
-        <UpdateProfile user={user} />
       </div>
     </div>
     {/* Language Modal */}
