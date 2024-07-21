@@ -14,6 +14,14 @@ const Layout = () => {
   // console.log(ads);
 
   const auth = localStorage.getItem("token");
+
+  const lan = localStorage.getItem('lan');
+  const [language, setLanguage] = useState("english");
+  useEffect(() => {
+    setLanguage(lan);
+  }, [lan]);
+  console.log(language);
+
   const navigate = useNavigate();
 
   if(!auth){

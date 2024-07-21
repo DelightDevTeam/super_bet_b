@@ -7,8 +7,10 @@ import { Form, Modal } from "react-bootstrap";
 
 
 export default function UpdateProfile({ user }) {
-
     const [isEditProfileModalOpen,setIsEditProfileModalOpen]=useState(false);
+
+    const language = localStorage.getItem("lan");
+
   return (
     <>
       <div className="profileContainer col-11 mx-auto m-3 m-lg-0 col-lg-4 p-3 rounded-3">
@@ -30,9 +32,9 @@ export default function UpdateProfile({ user }) {
           </div>
           <button
             onClick={() => setIsEditProfileModalOpen(true)}
-            className="w-full loginBtn py-1 fw-semibold mt-4"
+            className="w-full loginBtn py-1 mt-4"
           >
-            Edit Profile
+            {language == "english" ? "Edit Profile" : "ပရိုဖိုင်ပြင်ရန်"}
           </button>
         </div>
       </div>

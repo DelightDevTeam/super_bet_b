@@ -27,58 +27,67 @@ const ProfilePage = () => {
         {img:titok,link:'/'},
         {img:fb,link:'/'},
      ];
-     const languages=[
+    const languages=[
         {id:1,img:en,name:"English",value:'english'},
         {id:2,img:mm,name:"မြန်မာ",value:'myanmar'},
 
-     ]
+    ];
+    const language = localStorage.getItem("lan");
+
+    const changeLanguage=(lan)=>{
+        localStorage.setItem("lan", lan);
+        setIsLanguageModalOpen(false);
+        location.reload();
+    }
+
+
   return (<>
     <div className='pt-4 px-3 px-sm-4 pb-5 mb-5'>
       <div className="row cursor-pointer">
         <div className="col-lg-8 pe-3">
         <div className='profileContainer  p-3 rounded-3'>
-            <h5 className="fw-semibold mb-3">Account Settings</h5>
-            <div className="d-flex align-items-center justify-content-between">
-                <div onClick={()=>setIsLanguageModalOpen(true)} className='d-flex align-items-center gap-2'>
+            <h5 className="fw-semibold mb-3">{language === "english" ? "Account Settings" : "အကောင့်သတ်မှတ်ခြင်း"}</h5>
+            <div className="d-flex align-items-center justify-content-between" onClick={()=>setIsLanguageModalOpen(true)}>
+                <div className='d-flex align-items-center gap-2'>
                     <img src={translate} />
-                    <p>Translate</p>
+                    <p>{language === "english" ? "Language" : "ဘာသာစကား"}</p>
                 </div>
-                <p>English</p>
+                <p>{language === "english" ? "English" : "မြန်မာ"}</p>
             </div>
             <div className="my-2 d-flex align-items-center justify-content-between">
                 <Link to={'/win-loss-report'} className='d-flex align-items-center gap-2'>
                     <img src={winloss} />
-                    <p>Win / Loss Report</p>
+                    <p>{language === "english" ? "Win / Loss Report" : "အနိုင်/အရှုံးမှတ်တမ်း"}</p>
                 </Link>
                 <p></p>
             </div>
             <div className="my-3 d-flex align-items-center justify-content-between">
                 <div onClick={()=>setIsPwModalOpen(true)} className='d-flex align-items-center gap-2'>
                     <img src={translate} />
-                    <p>Password</p>
+                    <p>{language === "english" ? "Change Password" : "စကားဝှက်ပြောင်းရန်"}</p>
                 </div>
-                <p>Change</p>
+                
             </div>
-            <p className="fw-semibold mb-4 border-top pt-3">Contact us</p>
+            <p className="fw-semibold mb-4 border-top pt-3">{language === "english" ? "Contact Us" : "ဆက်သွယ်ရန်"}</p>
             <div className="row">
-                <div  className='col-sm-5 mb-4 mb-sm-0'>
+                {/* <div  className='col-sm-5 mb-4 mb-sm-0'>
                     <p className="fw-semibold mb-2">Visit Us</p>
                     <small>12 Marina Boulevard, DBS Asia Central, Marina Bay Financial Centre Tower 3, Singapore 018982</small>
-                </div>
+                </div> */}
                 <div className='mb-4 mb-sm-0  col-sm-4'>
-                    <p className="fw-semibold mb-2">Email Us</p>
+                    <p className="fw-semibold mb-2">{language === "english" ? "Email Us" : "အီးမေးလ်"}</p>
                     <small>superbet@gmail.com</small>
                 </div>
                 <div className='  col-sm-3'>
-                    <p className="fw-semibold mb-2">Call Us</p>
+                    <p className="fw-semibold mb-2">{language === "english" ? "Call Us" : "ဖုန်းခေါ်ဆိုရန်"}</p>
                     <small className='d-block'>+959-123456890</small>
                     <small>+959-123456890</small>
                  </div>
             </div>
             <div className="d-flex align-items-center gap-4 mt-4">
                 {socials.map((item,index)=>{
-                    return <Link to={item.link}>
-                    <img src={item.img} key={index} />
+                    return <Link to={item.link} key={index}>
+                    <img src={item.img} />
                     </Link>
                 })}
             </div>
@@ -93,7 +102,7 @@ const ProfilePage = () => {
         <h5>Change Language</h5>
         <small className='d-block mb-3'>Please select your Language</small>
             {languages.map((lang)=>{
-                return <div key={lang.id} className='cursor-pointer p-3 border rounded-3 mb-2 d-flex align-items-center gap-1'>
+                return <div key={lang.id} className='cursor-pointer p-3 border rounded-3 mb-2 d-flex align-items-center gap-1' onClick={() => changeLanguage(lang.value)}>
                     <img src={lang.img} />
                     <small className='fw-semibold'>{lang.name}</small>
                 </div>

@@ -15,6 +15,8 @@ export default function Login() {
     const navigate = useNavigate();
 
     const auth = localStorage.getItem('token');
+    const language = localStorage.getItem("lan");
+    
 
     useEffect(() => {
         if(auth){
@@ -87,10 +89,10 @@ export default function Login() {
                         <img src={logo} width={100} className='rounded-3 shadow border border-warning' alt="" />
                     </div>
                     
-                    <h4 className="text-center">Login</h4>
+                    <h4 className="text-center">{language === "english" ? "Login" : "အကောင့်ဝင်ရန်"}</h4>
                     <form onSubmit={login}>
                         <div className="mb-3">
-                            <label htmlFor="" className="form-label">Username</label>
+                            <label htmlFor="" className="form-label">{language === "english" ? "Username" : "အမည်"}</label>
                             <input type="text" 
                             className="form-control" 
                             value={name}
@@ -100,7 +102,7 @@ export default function Login() {
                             {error && error.user_name && <p className="text-danger">{error.user_name}</p>}
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="" className="form-label">Password</label>
+                            <label htmlFor="" className="form-label">{language === "english" ? "Password" : "စကားဝှက်"}</label>
                             <input type="password" 
                             className="form-control" 
                             value={password}
@@ -111,7 +113,7 @@ export default function Login() {
                         </div>
                         <div className="mt-5 mb-3">
                             {loading ? <Spinner /> : <button type='submit' className="btn btn-outline-light w-100">
-                                Login
+                              {language === "english" ? "Login" : "အကောင့်ဝင်ပါ"}
                             </button>}
                         </div>
                     </form>
