@@ -5,6 +5,7 @@ import { Spinner } from 'react-bootstrap';
 import BASE_URL from '../../hooks/baseURL';
 
 export default function Login() {
+  const [eye, setEye] = useState(false);
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [error , setError] = useState('');
@@ -77,7 +78,7 @@ export default function Login() {
           })
           .catch(error => {
           });
-    }
+      }
 
 
   return (
@@ -100,15 +101,20 @@ export default function Login() {
                             placeholder='Enter Username'
                             />
                             {error && error.user_name && <p className="text-danger">{error.user_name}</p>}
+                            {errMsg && <p className="text-danger">{errMsg}</p>}
                         </div>
                         <div className="mb-3">
                             <label htmlFor="" className="form-label">{language === "english" ? "Password" : "စကားဝှက်"}</label>
-                            <input type="password" 
-                            className="form-control" 
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder='Enter Password'
-                            />
+                            <div className="password">
+                              <input type={`${eye ? "text" : "password"}`} 
+                              className="form-control" 
+                              value={password}
+                              onChange={(e) => setPassword(e.target.value)}
+                              placeholder='Enter Password'
+                              />
+                              <i className={`fas fa-${eye ? "eye-slash" : "eye"} cursor-pointer eye`} onClick={()=>setEye(!eye)}></i>
+                            </div>
+
                             {error && error.password && <p className="text-danger">{error.password}</p>}
                         </div>
                         <div className="mt-5 mb-3">

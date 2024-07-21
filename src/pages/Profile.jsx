@@ -11,11 +11,12 @@ import mm from '../assets/images/mm.png'
 
 import { Link } from 'react-router-dom'
 
-import { Form, Modal } from 'react-bootstrap'
+import { Form, Modal, Spinner } from 'react-bootstrap'
 import useFetch from "../hooks/useFetch";
 import BASE_URL from '../hooks/baseURL';
 
 import UpdateProfile from '../components/UpdateProfile'
+import { toast, ToastContainer } from 'react-toastify'
 
 const ProfilePage = () => {
     const {data:user} = useFetch(BASE_URL + '/user');
@@ -40,9 +41,74 @@ const ProfilePage = () => {
         location.reload();
     }
 
+    //change password
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
+    const [errMsg, setErrMsg] = useState("");
+    const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const changePassword = async (e) => {
+        e.preventDefault();
+        setLoading(true)
+        const inputData = {
+            "current_password": currentPassword,
+            "password": newPassword,
+            "password_confirmation": confirmPassword
+        }
+        // console.log(inputData);
+        try {
+            const response = await fetch(BASE_URL + '/changePassword', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(inputData)
+            });
+    
+            if (!response.ok) {
+                setLoading(false)
+            let errorData = await response.json().catch(() => ({}));
+        
+            if (response.status === 422) {
+                setErrMsg("");
+                setError(errorData.errors || "Unknown error");
+                
+            } else if (response.status === 401) {
+                setError("");
+                setErrMsg(errorData.message || "Unauthorized");
+            } else {
+                throw new Error('Change Password Failed');
+            }
+        
+            throw new Error('Change Password Failed');
+            }
+    
+            const data = await response.json();
+            setLoading(false);
+        
+            toast.success("New Password changed successfully.", {
+            position: "top-right",
+            autoClose: 1000,
+            theme: 'dark',
+            hideProgressBar: false,
+            closeOnClick: true
+            });
+            setIsPwModalOpen(false);
+        } catch (error) {
+            // console.error('Error during fetch:', error);
+            setLoading(false);
+        }
+    }
+
 
   return (<>
     <div className='pt-4 px-3 px-sm-4 pb-5 mb-5'>
+        <ToastContainer />
       <div className="row cursor-pointer">
         <div className="col-lg-8 pe-3">
         <div className='profileContainer  p-3 rounded-3'>
@@ -111,10 +177,10 @@ const ProfilePage = () => {
             })}
         </Modal.Body>
          
-      </Modal>
-      {/* Password Modal */}
-      <Modal className='text-black profileModal' show={isPwModalOpen} onHide={()=>setIsPwModalOpen(false)}>
-         <Modal.Body>
+    </Modal>
+    {/* Password Modal */}
+    <Modal className='text-black profileModal' show={isPwModalOpen} onHide={()=>setIsPwModalOpen(false)}>
+        <Modal.Body>
          {language === "english" ? (
             <h5>Change Password</h5>
          ) : (
@@ -122,27 +188,47 @@ const ProfilePage = () => {
          )}
         
         <small className='d-block mb-3'>{language === "english" ? "Please fill all the required fields." : "ကျေးဇူးပြု၍ အချက်အလက်များဖြည့်ပါ။"}</small>
-        <Form>
+        <Form onSubmit={changePassword}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>{language === "english" ? "Current Password" : "စကားဝှက် အဟောင်းထည့်ပါ။"}</Form.Label>
-            <Form.Control type="password" placeholder='xxxxxx' />
+                <Form.Label>{language === "english" ? "Current Password" : "စကားဝှက် အဟောင်းထည့်ပါ။"}</Form.Label>
+                <Form.Control 
+                type="password" 
+                placeholder='xxxxxx' 
+                onChange={e => setCurrentPassword(e.target.value)}
+                value={currentPassword}
+                />
+                {error.current_password && <small className='text-danger'>*{error.current_password}</small>}
             </Form.Group>
              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>{language === "english" ? "New Password" : "စကားဝှက် အသစ်ထည့်ပါ။"}</Form.Label>
-                <Form.Control type="password" placeholder='xxxxxx' />
+                <Form.Control 
+                type="password" 
+                placeholder='xxxxxx' 
+                onChange={e => setNewPassword(e.target.value)}
+                value={newPassword}
+                />
+                {error.password && <small className='text-danger'>*{error.password}</small>}
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>{language === "english" ? "Confirm Password" : "စကားဝှက် အသစ်အတည်ပြုပါ။"}</Form.Label>
-                <Form.Control type="password" placeholder='xxxxxx' />
+                <Form.Control 
+                type="password" 
+                placeholder='xxxxxx'
+                onChange={e => setConfirmPassword(e.target.value)}
+                value={confirmPassword}
+                />
+                {error.password_confirmation && <small className='text-danger'>*{error.password_confirmation}</small>}
             </Form.Group>
-         </Form>
-            <button className='loginBtn py-2 w-100 rounded-3'>
-                <small className="fw-semibold">{language === "english" ? "Apply Changes" : "ပြောင်းပါ။"}</small>
+            <button className='loginBtn py-2 w-100 rounded-3' type="submit">
+                {loading ? <Spinner /> : (
+                    <small className="fw-semibold">{language === "english" ? "Apply Changes" : "ပြောင်းပါ။"}</small>
+                )}
             </button>
+         </Form>
+
         </Modal.Body>
          
-      </Modal>
-
+    </Modal>
     </>
   )
 }

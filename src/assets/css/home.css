@@ -3,6 +3,17 @@
     height: 45px;
     object-fit: cover;
 }
+.password{
+    position: relative;
+}
+.eye{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: #000;
+}
+
 .primaryBtn{
     background: linear-gradient(0.95deg, #00CECE 5.11%, rgba(0, 206, 206, 0) 109.31%);
     color: white;
