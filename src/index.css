@@ -37,6 +37,13 @@ a{
   width: auto;
   object-fit: cover;
 }
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .adsModal{
   margin-top: 20vh !important;
   --bs-modal-bg: none !important;
