@@ -15,33 +15,9 @@ const Navbar = () => {
   const language = localStorage.getItem('lan');
 
   // console.log(user);
-  const logout = async (e) => {
-    e.preventDefault();
-    setLoader(true);
-    localStorage.removeItem('token');
-    window.location.href = "/login";
-    try {
-        const response = await fetch(`${BASE_URL}/logout`, {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
-            },
-        });
-        if (response.ok) {
-            // console.log("Logout success!");
-            setLoader(false);
-            window.location.href = "/login";
-        } else {
-            console.error("Logout failed:", response.statusText);
-        }
-    } catch (error) {
-        console.error("Error during logout:", error);
-    }
-};
 
-const reload = () => window.location.reload();
+
+// const reload = () => window.location.reload();
   
   return (
     <div className='py-2 py-sm-3 px-1 px-sm-2 px-lg-4 d-flex align-items-center justify-content-between'>
@@ -52,14 +28,14 @@ const reload = () => window.location.reload();
       <div className="d-flex align-items-center gap-4">
         <div className='d-flex align-items-center gap-2'>
         {/* <img src={user} className='user' /> */}
-        <i className="fas fa-rotate cursor-pointer me-1" onClick={() => reload()}></i>
+        {/* <i className="fas fa-rotate cursor-pointer me-1" onClick={() => reload()}></i> */}
           <FaRegCircleUser className="" style={{ fontSize: "30px" }} />
           <div>
             <small className='fw-semibold d-block userNav'>{user && user.name}</small>
             <small className='userNav fw-semibold'>UserID : {user && user.user_name}</small>
           </div>
         </div>
-
+{/* 
         {loader ? (
           <Spinner />
         ): (
@@ -70,7 +46,7 @@ const reload = () => window.location.reload();
                 <FaRightFromBracket />
                 <small className='ms-2 d-none d-md-inline'>{language === "english" ? "Logout" : "ထွက်ရန်"}</small>
           </button>
-        )}
+        )} */}
 
       </div>
       <Modal  className='text-black loginModal rounded-4' show={isLoginOpen} onHide={()=>setIsLoginOpen(false)}>
@@ -95,9 +71,9 @@ const reload = () => window.location.reload();
         <Form.Check type="checkbox" label="I confirm that I am over 18 years old and have read Terms of Service" />
       </Form.Group>
       </Form>
-    <button className="mb-3 loginBtn fw-semibold py-2 w-full">
-      Login
-    </button>
+        <button className="mb-3 loginBtn fw-semibold py-2 w-full">
+          Login
+        </button>
         </Modal.Body>
         
       </Modal>

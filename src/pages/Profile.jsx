@@ -49,6 +49,7 @@ const ProfilePage = () => {
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const changePassword = async (e) => {
         e.preventDefault();
@@ -105,6 +106,32 @@ const ProfilePage = () => {
         }
     }
 
+    const logout = async (e) => {
+        e.preventDefault();
+        setLoader(true);
+        localStorage.removeItem('token');
+        window.location.href = "/login";
+        try {
+            const response = await fetch(`${BASE_URL}/logout`, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
+                },
+            });
+            if (response.ok) {
+                // console.log("Logout success!");
+                setLoader(false);
+                window.location.href = "/login";
+            } else {
+                console.error("Logout failed:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error during logout:", error);
+        }
+    };
+
 
   return (<>
     <div className='pt-4 px-3 px-sm-4 pb-5 mb-5'>
@@ -132,7 +159,16 @@ const ProfilePage = () => {
                         <img src={translate} />
                         <p>{language === "english" ? "Change Password" : "စကားဝှက်ပြောင်းရန်"}</p>
                     </div>
-                    
+                </div>
+                <div className="my-3 d-flex align-items-center justify-content-between">
+                    <div onClick={logout} className='d-flex align-items-center gap-2'>
+                        {loader ? (
+                            <Spinner animation="border" size="sm" />) : (
+                            <i className="fas fa-right-from-bracket me-1"></i>  
+                            )
+                        }
+                        <p>{language === "english" ? "Log Out" : "အကောင့်ထွက်ရန်"}</p>
+                    </div>
                 </div>
                 <p className="fw-semibold mb-4 border-top pt-3">{language === "english" ? "Contact Us" : "ဆက်သွယ်ရန်"}</p>
                 <div className="row">
