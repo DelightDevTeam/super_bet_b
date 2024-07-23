@@ -187,7 +187,7 @@ const TopUpPage = () => {
                 </div>
             </div>
             {loading ? <Spinner /> : <button className="loginBtn w-full fw-bold py-2 rounded-3">
-              {language === "english" ? "Submit" : "t"}
+              {language === "english" ? "Submit" : "တင်သွင်းမည်"}
             </button>}
             
         </form>
