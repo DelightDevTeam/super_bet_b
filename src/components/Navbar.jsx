@@ -32,7 +32,9 @@ const Navbar = () => {
           <FaRegCircleUser className="" style={{ fontSize: "30px" }} />
           <div>
             <small className='fw-semibold d-block userNav'>{user && user.name}</small>
-            <small className='userNav fw-semibold'>UserID : {user && user.user_name}</small>
+            {/* <small className='userNav fw-semibold'>UserID : {user && user.user_name}</small> */}
+            <small className='userNav fw-semibold'>
+              <i className="fas fa-wallet"></i> : {user && user.balance}</small>
           </div>
         </div>
 {/* 
