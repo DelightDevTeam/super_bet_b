@@ -34,7 +34,7 @@ const Navbar = () => {
             {/* <small className='fw-semibold d-block userNav'>{user && user.name}</small> */}
             <small className='userNav fw-semibold'>UserID : {user && user.user_name}</small>
             <small className='userNav fw-semibold'>
-              <i className="fas fa-wallet"></i> : {user && user.balance}</small>
+              <i className="fas fa-wallet"></i> : {user && Number(user.balance).toLocaleString()}</small>
           </div>
         </div>
 {/* 
