@@ -102,7 +102,7 @@ const GameTabs = () => {
               slot_lists.map((item, index) => {
                 return (
                   <Link
-                    to={"/games/" + item.id + "/" + item.pivot.game_type_id}
+                    to={"/games/" + item.id + "/" +  slotGame?.game_type?.code}
                     key={index}
                     style={{ position: "relative" }}
                     className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -124,7 +124,7 @@ const GameTabs = () => {
                     key={index}
                     style={{ position: "relative" }}
                     className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                    onClick={launchGame(slotGame.game_lobby?.code, item.code)}
+                    onClick={launchGame(slotGame.game_lobby?.code, item.id)}
                   >
                     <img
                       src={item.imgUrl}
@@ -143,7 +143,7 @@ const GameTabs = () => {
               casinos_lists.map((item, index) => {
                 return (
                   <Link
-                    to={"/games/" + item.id + "/" + item.pivot.game_type_id}
+                    to={"/games/" + item.id + "/" + casinoGame?.game_type?.code}
                     key={index}
                     style={{ position: "relative" }}
                     className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -165,7 +165,7 @@ const GameTabs = () => {
                     key={index}
                     style={{ position: "relative" }}
                     className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                    onClick={launchGame(casinoGame.game_lobby?.code, item.code)}
+                    onClick={launchGame(casinoGame.game_lobby?.code, item.id)}
                   >
                     <img
                       src={item.imgUrl}
@@ -184,7 +184,7 @@ const GameTabs = () => {
               sports_lists.map((item, index) => {
                 return (
                   <Link
-                    to={"/games/" + item.id + "/" + item.pivot.game_type_id}
+                    to={"/games/" + item.id + "/" + sportGame?.game_type?.code}
                     key={index}
                     style={{ position: "relative" }}
                     className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -206,7 +206,7 @@ const GameTabs = () => {
                     key={index}
                     style={{ position: "relative" }}
                     className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                    onClick={launchGame(sportGame.game_lobby?.code, item.code)}
+                    onClick={launchGame(sportGame.game_lobby?.code, item.id)}
                   >
                     <img
                       src={item.imgUrl}
@@ -225,7 +225,7 @@ const GameTabs = () => {
               fish_lists.map((item, index) => {
                 return (
                   <Link
-                    to={"/games/" + item.id + "/" + item.pivot.game_type_id}
+                    to={"/games/" + item.id + "/" + fishGame?.game_type?.code}
                     key={index}
                     style={{ position: "relative" }}
                     className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -247,7 +247,7 @@ const GameTabs = () => {
                     key={index}
                     style={{ position: "relative" }}
                     className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                    onClick={launchGame(fishGame.game_lobby?.code, item.code)}
+                    onClick={launchGame(fishGame.game_lobby?.code, item.id)}
                   >
                     <img
                       src={item.imgUrl}
@@ -268,7 +268,7 @@ const GameTabs = () => {
             slot_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.code + "/" + slotGame?.game_type?.code}
+                  to={"/games/" + item.id + "/" + slotGame?.game_type?.code}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -290,7 +290,7 @@ const GameTabs = () => {
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                  onClick={launchGame(slotGame.game_lobby?.code, item.code)}
+                  onClick={launchGame(slotGame.game_lobby?.code, item.id)}
                 >
                   <img
                     src={item.imgUrl}
@@ -310,7 +310,7 @@ const GameTabs = () => {
             casinos_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.code + "/" + casinoGame?.game_type?.code}
+                  to={"/games/" + item.id + "/" + casinoGame?.game_type?.code}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -332,7 +332,7 @@ const GameTabs = () => {
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                  onClick={launchGame(casinoGame.game_lobby?.code, item.code)}
+                  onClick={launchGame(casinoGame.game_lobby?.code, item.id)}
                 >
                   <img
                     src={item.imgUrl}
@@ -352,7 +352,7 @@ const GameTabs = () => {
             sports_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.code + "/" + sportGame?.game_type?.code}
+                  to={"/games/" + item.id + "/" + sportGame?.game_type?.code}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -374,7 +374,7 @@ const GameTabs = () => {
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                  onClick={launchGame(sportGame.game_lobby?.code, item.code)}
+                  onClick={launchGame(sportGame.game_lobby?.code, item.id)}
                 >
                   <img
                     src={item.imgUrl}
@@ -394,7 +394,7 @@ const GameTabs = () => {
             fish_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.code + "/" + fishGame?.game_type?.code}
+                  to={"/games/" + item.id + "/" + fishGame?.game_type?.code}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -416,7 +416,7 @@ const GameTabs = () => {
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
-                  onClick={launchGame(fishGame.game_lobby?.code, item.code)}
+                  onClick={launchGame(fishGame.game_lobby?.code, item.id)}
                 >
                   <img
                     src={item.imgUrl}
