@@ -266,7 +266,7 @@ const GameTabs = () => {
             slot_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.id + "/" + item.pivot.game_type_id}
+                  to={"/games/" + item.code + "/" + item.pivot.game_type_id}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -308,7 +308,7 @@ const GameTabs = () => {
             casinos_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.id + "/" + item.pivot.game_type_id}
+                  to={"/games/" + item.code + "/" + item.pivot.game_type_id}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -350,7 +350,7 @@ const GameTabs = () => {
             sports_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.id + "/" + item.pivot.game_type_id}
+                  to={"/games/" + item.code + "/" + item.pivot.game_type_id}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -392,7 +392,7 @@ const GameTabs = () => {
             fish_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.id + "/" + item.pivot.game_type_id}
+                  to={"/games/" + item.code + "/" + item.pivot.game_type_id}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
