@@ -34,6 +34,7 @@ const GameTabs = () => {
   const { data: fishGame } = useFetch(BASE_URL + "/gameTypeProducts/4");
 
   const slot_lists = slotGame && slotGame.game_type?.products;
+  
   const slot_lobby = slotGame && slotGame.game_lobby?.products;
   const casinos_lists = casinoGame && casinoGame.game_type?.products;
   const casinos_lobby = casinoGame && casinoGame.game_lobby?.products;
@@ -41,6 +42,7 @@ const GameTabs = () => {
   const sports_lobby = sportGame && sportGame.game_lobby?.products;
   const fish_lists = fishGame && fishGame.game_type?.products;
   const fish_lobby = fishGame && fishGame.game_lobby?.products;
+  // console.log(fishGame?.game_type?.code);
 
   const launchGame = (t_code, p_code) => (e) => {
     e.preventDefault();
@@ -266,7 +268,7 @@ const GameTabs = () => {
             slot_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.code + "/" + item.pivot.game_type_id}
+                  to={"/games/" + item.code + "/" + slotGame?.game_type?.code}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -308,7 +310,7 @@ const GameTabs = () => {
             casinos_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.code + "/" + item.pivot.game_type_id}
+                  to={"/games/" + item.code + "/" + casinoGame?.game_type?.code}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -350,7 +352,7 @@ const GameTabs = () => {
             sports_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.code + "/" + item.pivot.game_type_id}
+                  to={"/games/" + item.code + "/" + sportGame?.game_type?.code}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
@@ -392,7 +394,7 @@ const GameTabs = () => {
             fish_lists.map((item, index) => {
               return (
                 <Link
-                  to={"/games/" + item.code + "/" + item.pivot.game_type_id}
+                  to={"/games/" + item.code + "/" + fishGame?.game_type?.code}
                   key={index}
                   style={{ position: "relative" }}
                   className=" cursor-pointer col-4 col-sm-3 col-lg-2 mb-2 p-0 p-sm-1 m-0"
