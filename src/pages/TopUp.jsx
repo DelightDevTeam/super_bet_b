@@ -13,6 +13,7 @@ const TopUpPage = () => {
   const [amount, setAmount] = useState(0);
   const [paymentType, setPaymentType] = useState("");
   const [file, setFile] = useState(null);
+  const [transNo, setTransNo] = useState("");
   const [preview, setPreview] = useState(null);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -69,7 +70,7 @@ const TopUpPage = () => {
       const formData = new FormData();
       formData.append('agent_payment_id', paymentType);
       formData.append('amount', amount);
-      formData.append('image', file);
+      formData.append('image', transNo);
       formData.append('note', message ?? "");
     
       try {
@@ -159,7 +160,7 @@ const TopUpPage = () => {
                         />
                     </Form.Group>
 
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <Form.Group controlId="exampleForm.ControlInput1">
                             <Form.Label>{language === "english" ? "Screenshot *" : "လွှဲပြီးကြောင်းဓာတ်ပုံ"}</Form.Label>
                             <Form.Control 
@@ -170,6 +171,17 @@ const TopUpPage = () => {
                         </Form.Group>
                         {!preview && error.image && <small className="text-danger fw-bold">{error.image}</small>}
                         {preview && <img className="mt-3" src={preview} alt="preview" style={{ width: '50%', height: 'auto' }} />}
+                    </div> */}
+                    <div className="mb-3">
+                      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                          <Form.Label>{language === "english" ? "Transaction No (Last 6 digits)" : "ငွေလွှဲနံပတ် (နောက်ဆုံး၆လုံး)"}</Form.Label>
+                          <Form.Control 
+                          type="text" 
+                          placeholder="Enter Transaction No" 
+                          onChange={e => setTransNo(e.target.value)}
+                          value={transNo}
+                          />
+                      </Form.Group>
                     </div>
 
                 </div>
