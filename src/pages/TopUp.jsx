@@ -66,11 +66,22 @@ const TopUpPage = () => {
         });
         return;
       }
+      if (transNo.length !== 6) {
+        setLoading(false);
+        toast.error("ငွေလွှဲ​နံပါတ် နောက်ဆုံးဂဏန်း၆လုံး ထည့်ပေးပါ။", {
+          position: "top-right",
+          autoClose: 1000,
+          theme: 'dark',
+          hideProgressBar: false,
+          closeOnClick: true
+        });
+        return;
+      }
     
       const formData = new FormData();
       formData.append('agent_payment_id', paymentType);
       formData.append('amount', amount);
-      formData.append('image', transNo);
+      formData.append('refrence_no', transNo);
       formData.append('note', message ?? "");
     
       try {

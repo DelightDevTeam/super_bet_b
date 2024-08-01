@@ -20,8 +20,10 @@ import { toast, ToastContainer } from 'react-toastify'
 
 const ProfilePage = () => {
     const {data:user} = useFetch(BASE_URL + '/user');
+    const {data:contact} = useFetch(BASE_URL + '/contact');
     const [isLanguageModalOpen,setIsLanguageModalOpen]=useState(false);
     const [isPwModalOpen,setIsPwModalOpen]=useState(false);
+    console.log(contact);
     
     const socials=[
         {img:twitter,link:'/'},
@@ -170,20 +172,23 @@ const ProfilePage = () => {
                         <p>{language === "english" ? "Log Out" : "အကောင့်ထွက်ရန်"}</p>
                     </div>
                 </div>
-                <p className="fw-semibold mb-4 border-top pt-3">{language === "english" ? "Contact Us" : "ဆက်သွယ်ရန်"}</p>
+                <p className="fw-semibold mb-4 border-top pt-3">{language === "english" ? "Contact To Agents" : "မိမိ Agent သို့ ဆက်သွယ်ရန်"}</p>
                 <div className="row">
                     {/* <div  className='col-sm-5 mb-4 mb-sm-0'>
                         <p className="fw-semibold mb-2">Visit Us</p>
                         <small>12 Marina Boulevard, DBS Asia Central, Marina Bay Financial Centre Tower 3, Singapore 018982</small>
                     </div> */}
-                    <div className='mb-4 mb-sm-0  col-sm-4'>
-                        <p className="fw-semibold mb-2">{language === "english" ? "Email Us" : "အီးမေးလ်"}</p>
-                        <small>superbet@gmail.com</small>
-                    </div>
+                    {contact?.email && (
+                        <div className='mb-4 mb-sm-0  col-sm-4'>
+                            <p className="fw-semibold mb-2">{language === "english" ? "Email Us" : "အီးမေးလ်"}</p>
+                            <small>{contact?.email}</small>
+                        </div>
+                    )}
+
                     <div className='  col-sm-3'>
-                        <p className="fw-semibold mb-2">{language === "english" ? "Call Us" : "ဖုန်းခေါ်ဆိုရန်"}</p>
-                        <small className='d-block'>+959-123456890</small>
-                        <small>+959-123456890</small>
+                        <p className="fw-semibold mb-2">{language === "english" ? "Call Us" : "ဖုန်း"}</p>
+                        <small className='d-block'>{contact?.phone}</small>
+                        {/* <small>+959-123456890</small> */}
                     </div>
                 </div>
                 <div className="d-flex align-items-center gap-4 mt-4">

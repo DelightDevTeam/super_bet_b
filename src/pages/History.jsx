@@ -9,6 +9,7 @@ const deposits = [
   { field: "id", headerName: "No", width: 150},
   { field: "payment_type", headerName: "Payment Method", width: 150 },
   { field: "status", headerName: "Status", width: 150 },
+  { field: "refrence_no", headerName: "Transaction No", width: 150 },
   // { field: "account_no", headerName: "Account No", width: 150 },
   {
     field: "amount",
@@ -26,6 +27,7 @@ const deposits_mm = [
   { field: "id", headerName: "နံပါတ်", width: 150},
   { field: "payment_type", headerName: "ဘဏ်", width: 150 },
   { field: "status", headerName: "အခြေအနေ", width: 150 },
+  { field: "refrence_no", headerName: "ငွေလွှဲနံပါတ်", width: 150 },
   // { field: "account_no", headerName: "Account No", width: 150 },
   {
     field: "amount",
@@ -79,7 +81,7 @@ const HistoryPage = () => {
   const {data: deposit} = useFetch(BASE_URL + "/transaction/deposit-log");
   const {data: withdraw} = useFetch(BASE_URL + "/transaction/withdraw-log");
   const [show, setShow] = useState(false);
-  // console.log(deposit);
+  console.log(deposit);
   const language = localStorage.getItem("lan");
 
   return (
