@@ -81,7 +81,7 @@ const HistoryPage = () => {
   const {data: deposit} = useFetch(BASE_URL + "/transaction/deposit-log");
   const {data: withdraw} = useFetch(BASE_URL + "/transaction/withdraw-log");
   const [show, setShow] = useState(false);
-  console.log(deposit);
+  // console.log(deposit);
   const language = localStorage.getItem("lan");
 
   return (
