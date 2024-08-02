@@ -56,7 +56,7 @@ const Layout = () => {
         </Modal.Header>
         <Modal.Body>
           <img
-            src={"https://shwedinker777.online/assets/img/banners_ads/1.png"}
+            src={ads?.img_url}
             className="popUpImg"
           />
         </Modal.Body>
