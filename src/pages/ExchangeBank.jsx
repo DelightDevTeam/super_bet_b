@@ -38,7 +38,7 @@ const ExchangeBank = () => {
             {type === "top-up" && (
                 banks && banks.map((item, index)=>{
                     return <div onClick={()=>{
-                        searchParams.get('type')==='top-up'? navigate(`/top-up?bank=${item.payment_type_id}`) :  navigate(`/with-draw?bank=${item.value}`)
+                        searchParams.get('type')==='top-up'? navigate(`/top-up?bank=${item.id}`) :  navigate(`/with-draw?bank=${item.value}`)
                     }} key={index} className="col-md-1 col-6">
                         <img src={item.payment_type.image_url ?? item.image_url}  className='bankImg img-fluid rounded-3 shadow' />
                         <small className='d-block mt-3'>{item.payment_type.name}</small>

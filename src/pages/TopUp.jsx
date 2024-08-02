@@ -24,6 +24,7 @@ const TopUpPage = () => {
    const id = searchParams.get("bank");
    const {data:banks} = useFetch(BASE_URL + '/agent-payment-type');
    const bank = banks && banks.find(bank => bank.id == parseInt(id));
+  //  console.log(ibd);
 
    const handleCopyText = () => {
         navigator.clipboard.writeText(bank?.account_no);
