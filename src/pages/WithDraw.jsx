@@ -10,7 +10,8 @@ const WithDrawPage = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("bank");
   const navigate = useNavigate();
-
+  const {data:user} = useFetch(BASE_URL + '/user');
+  const balance = user?.balance;
 
   const {data:banks} = useFetch(BASE_URL + '/payment-type');
   const bank = banks && banks.find(bank => bank.id == parseInt(id));
@@ -31,6 +32,18 @@ const WithDrawPage = () => {
   const withdraw = async (e) => {
     e.preventDefault();
     setLoading(true);
+    if(balance < 1000){
+      setLoading(false)
+      toast.error("ငွေထုတ်ယူရန် လက်ကျန်ငွေ အနည်းဆုံး ၁၀၀၀ကျပ် ရှိရပါမည်။", {
+        position: "top-right",
+        autoClose: 1000,
+        theme: 'dark',
+        hideProgressBar: false,
+        closeOnClick: true
+      })
+      return;
+    }
+    
     if (amount < 1000) {
     setLoading(false)
       toast.error("အနည်းဆုံး ၁၀၀၀ကျပ်မှ စထုတ်ပေးပါရန်။", {
@@ -42,6 +55,19 @@ const WithDrawPage = () => {
       });
       return;
     }
+
+    if(amount > balance){
+      setLoading(false)
+      toast.error("ငွေထုတ်ယူမည့် ပမာဏမှာ လက်ကျန်ငွေ ထပ် ကျော်လွန်နေပါသည်။", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: 'dark',
+        hideProgressBar: false,
+        closeOnClick: true
+      })
+      return;
+    }
+    
     const inputData = {
         "account_name": accountName,
         "account_no": accountNo,
