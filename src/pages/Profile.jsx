@@ -93,15 +93,15 @@ const ProfilePage = () => {
     
             const data = await response.json();
             setLoading(false);
-        
-            toast.success("New Password changed successfully.", {
-            position: "top-right",
-            autoClose: 1000,
-            theme: 'dark',
-            hideProgressBar: false,
-            closeOnClick: true
-            });
             setIsPwModalOpen(false);
+            toast.success("New Password changed successfully.", {
+                position: "top-right",
+                autoClose: 1000,
+                theme: 'dark',
+                hideProgressBar: false,
+                closeOnClick: true
+            });
+            
         } catch (error) {
             // console.error('Error during fetch:', error);
             setLoading(false);
